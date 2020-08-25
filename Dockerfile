@@ -1,8 +1,9 @@
-FROM python:3.7.7-buster
+FROM python:3.8.5-buster
 
 ARG SPARK_JARS=jars
 ARG IMG_PATH=kubernetes/dockerfiles
-ARG SPARK_VERSION=2.4.5
+ARG SPARK_VERSION=3.0.0
+ARG HADOOP_VERSION=3.2
 
 ENV SPARK_HOME /opt/spark
 ENV JAVA_HOME /usr/lib/jvm/adoptopenjdk-8-hotspot-amd64
@@ -21,9 +22,9 @@ RUN \
     apt-get update && \
     apt-get install -y adoptopenjdk-8-hotspot python3-dev && \
     # Install Spark
-    curl https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz -OLJ && \
-    tar -xzvf spark-${SPARK_VERSION}-bin-hadoop2.7.tgz && \
-    cd spark-${SPARK_VERSION}-bin-hadoop2.7 && \
+    curl https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -OLJ && \
+    tar -xzvf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz && \
+    cd spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} && \
     mkdir -p ${SPARK_HOME}/python && \
     set -ex && \
     mkdir -p /opt/spark && \
@@ -43,16 +44,16 @@ RUN \
     # Sed command to remove use of tini
     sed -i -e 's/\/usr\/bin\/tini[^"]*//g' /opt/entrypoint.sh && \
     # Remove extracted Spark
-    rm -rf /spark-${SPARK_VERSION}-bin-hadoop2.7
+    rm -rf /spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}
 
 RUN \
     cd ${SPARK_HOME}/jars && \
     # Install GCS connector
-    curl https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop2-latest.jar -OLJ && \
+    curl https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-latest.jar -OLJ && \
     # Install Hadoop AWS integration
-    curl https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.3/hadoop-aws-2.7.3.jar -OLJ && \
+    curl https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.1/hadoop-aws-3.2.1.jar -OLJ && \
     # Install AWS SDK For Java
-    curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar -OLJ
+    curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.11.848/aws-java-sdk-1.11.848.jar -OLJ
 
 WORKDIR /opt/spark/work-dir
 
