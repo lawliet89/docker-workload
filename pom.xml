@@ -11,7 +11,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<configuration>
-					<outputDirectory>${env.SPARK_HOME}/jars</outputDirectory>
+					<outputDirectory>jars</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
