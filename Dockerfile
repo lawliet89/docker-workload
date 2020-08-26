@@ -46,8 +46,7 @@ RUN \
     # Remove extracted Spark
     rm -rf /spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}
 
-RUN \
-    cd ${SPARK_HOME}/jars && \
+RUN cd ${SPARK_HOME}/jars && \
     # Install GCS connector
     curl https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-latest.jar -OLJ && \
     # Install Hadoop AWS integration
