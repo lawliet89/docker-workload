@@ -24,7 +24,10 @@ RUN curl https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SP
 
 # Install 3rd party packages
 COPY pom.xml .
-RUN mvn dependency:copy-dependencies
+RUN mvn dependency:copy-dependencies && \
+    # Remove outdated guava library
+    rm jars/guava-14.0.1.jar && \
+    mvn dependency:purge-local-repository -DreResolve=false
 
 # Finalize the image for production use
 RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su && \
