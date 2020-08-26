@@ -54,7 +54,7 @@ RUN \
     curl https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.1/hadoop-aws-3.2.1.jar -OLJ && \
     # Update Guava
     curl https://repo1.maven.org/maven2/com/google/guava/guava/29.0-jre/guava-29.0-jre.jar -OLJ && \
-    rm /opt/spark/jars/guava-14.0.1.jar && \
+    rm guava-14.0.1.jar && \
     # Install AWS SDK For Java
     curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.848/aws-java-sdk-bundle-1.11.848.jar -OLJ
 
