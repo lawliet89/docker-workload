@@ -26,7 +26,8 @@ COPY pom.xml .
 RUN mvn dependency:copy-dependencies && \
     # Remove outdated guava library
     rm jars/guava-14.0.1.jar && \
-    mvn dependency:purge-local-repository -DreResolve=false
+    # Purge local maven cache
+    rm -rf /root/.m2
 
 # Finalize the image for production use
 RUN echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su && \

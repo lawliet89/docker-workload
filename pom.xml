@@ -18,6 +18,20 @@
 	</build>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
+		<dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-core_2.12</artifactId>
+			<version>3.0.0</version>
+			<!-- Only adding spark here for version check -->
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.google.cloud.bigdataoss/gcs-connector -->
 		<dependency>
 			<groupId>com.google.cloud.bigdataoss</groupId>
