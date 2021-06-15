@@ -1,0 +1,9 @@
+bdrk[model-monitoring,analyzer]
+numpy
+pandas
+lightgbm
+scikit-learn
+pyspark
+fastparquet
+s3fs
+streamlit
