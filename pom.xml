@@ -3,7 +3,7 @@
 
 	<groupId>com.basis-ai.bedrock</groupId>
 	<artifactId>workload-standard</artifactId>
-	<version>0.2.3</version>
+	<version>0.3.1</version>
 
 	<build>
 		<plugins>
@@ -59,6 +59,14 @@
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-aws</artifactId>
 			<version>3.2.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bundle -->
+		<!-- >= 1.11.704 needed for IRSA; hadoop-aws 3.2.0's version is too old -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-bundle</artifactId>
+			<version>1.12.5</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
